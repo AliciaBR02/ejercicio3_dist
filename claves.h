@@ -15,91 +15,101 @@ extern "C" {
 #endif
 
 
-struct op3_1_argument {
+struct respuesta {
+	int result;
+	char *value1;
+	int value2;
+	double value3;
+};
+typedef struct respuesta respuesta;
+
+struct server_set_value_1_argument {
+	int key;
+	char *value1;
+	int value2;
+	double value3;
+};
+typedef struct server_set_value_1_argument server_set_value_1_argument;
+
+struct server_modify_value_1_argument {
 	int key;
 	char *arg2;
 	int value2;
 	double value3;
 };
-typedef struct op3_1_argument op3_1_argument;
+typedef struct server_modify_value_1_argument server_modify_value_1_argument;
 
-struct op6_1_argument {
-	int key;
-	char *arg2;
-	int value2;
-	double value3;
-};
-typedef struct op6_1_argument op6_1_argument;
-
-struct op7_1_argument {
+struct server_copy_key_1_argument {
 	int key1;
 	int key2;
 };
-typedef struct op7_1_argument op7_1_argument;
+typedef struct server_copy_key_1_argument server_copy_key_1_argument;
 
 #define CLAVES 99
 #define OPERACIONESVER 1
 
 #if defined(__STDC__) || defined(__cplusplus)
-#define op1 1
-extern  enum clnt_stat op1_1(int *, CLIENT *);
-extern  bool_t op1_1_svc(int *, struct svc_req *);
-#define op2 2
-extern  enum clnt_stat op2_1(int , int *, CLIENT *);
-extern  bool_t op2_1_svc(int , int *, struct svc_req *);
-#define op3 3
-extern  enum clnt_stat op3_1(int , char *, int , double , int *, CLIENT *);
-extern  bool_t op3_1_svc(int , char *, int , double , int *, struct svc_req *);
-#define op4 4
-extern  enum clnt_stat op4_1(int , char **, CLIENT *);
-extern  bool_t op4_1_svc(int , char **, struct svc_req *);
-#define op5 5
-extern  enum clnt_stat op5_1(int , int *, CLIENT *);
-extern  bool_t op5_1_svc(int , int *, struct svc_req *);
-#define op6 6
-extern  enum clnt_stat op6_1(int , char *, int , double , int *, CLIENT *);
-extern  bool_t op6_1_svc(int , char *, int , double , int *, struct svc_req *);
-#define op7 7
-extern  enum clnt_stat op7_1(int , int , int *, CLIENT *);
-extern  bool_t op7_1_svc(int , int , int *, struct svc_req *);
+#define server_init 1
+extern  enum clnt_stat server_init_1(int *, CLIENT *);
+extern  bool_t server_init_1_svc(int *, struct svc_req *);
+#define server_exist 2
+extern  enum clnt_stat server_exist_1(int , int *, CLIENT *);
+extern  bool_t server_exist_1_svc(int , int *, struct svc_req *);
+#define server_set_value 3
+extern  enum clnt_stat server_set_value_1(int , char *, int , double , int *, CLIENT *);
+extern  bool_t server_set_value_1_svc(int , char *, int , double , int *, struct svc_req *);
+#define server_get_value 4
+extern  enum clnt_stat server_get_value_1(int , respuesta *, CLIENT *);
+extern  bool_t server_get_value_1_svc(int , respuesta *, struct svc_req *);
+#define server_delete_value 5
+extern  enum clnt_stat server_delete_value_1(int , int *, CLIENT *);
+extern  bool_t server_delete_value_1_svc(int , int *, struct svc_req *);
+#define server_modify_value 6
+extern  enum clnt_stat server_modify_value_1(int , char *, int , double , int *, CLIENT *);
+extern  bool_t server_modify_value_1_svc(int , char *, int , double , int *, struct svc_req *);
+#define server_copy_key 7
+extern  enum clnt_stat server_copy_key_1(int , int , int *, CLIENT *);
+extern  bool_t server_copy_key_1_svc(int , int , int *, struct svc_req *);
 extern int claves_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
-#define op1 1
-extern  enum clnt_stat op1_1();
-extern  bool_t op1_1_svc();
-#define op2 2
-extern  enum clnt_stat op2_1();
-extern  bool_t op2_1_svc();
-#define op3 3
-extern  enum clnt_stat op3_1();
-extern  bool_t op3_1_svc();
-#define op4 4
-extern  enum clnt_stat op4_1();
-extern  bool_t op4_1_svc();
-#define op5 5
-extern  enum clnt_stat op5_1();
-extern  bool_t op5_1_svc();
-#define op6 6
-extern  enum clnt_stat op6_1();
-extern  bool_t op6_1_svc();
-#define op7 7
-extern  enum clnt_stat op7_1();
-extern  bool_t op7_1_svc();
+#define server_init 1
+extern  enum clnt_stat server_init_1();
+extern  bool_t server_init_1_svc();
+#define server_exist 2
+extern  enum clnt_stat server_exist_1();
+extern  bool_t server_exist_1_svc();
+#define server_set_value 3
+extern  enum clnt_stat server_set_value_1();
+extern  bool_t server_set_value_1_svc();
+#define server_get_value 4
+extern  enum clnt_stat server_get_value_1();
+extern  bool_t server_get_value_1_svc();
+#define server_delete_value 5
+extern  enum clnt_stat server_delete_value_1();
+extern  bool_t server_delete_value_1_svc();
+#define server_modify_value 6
+extern  enum clnt_stat server_modify_value_1();
+extern  bool_t server_modify_value_1_svc();
+#define server_copy_key 7
+extern  enum clnt_stat server_copy_key_1();
+extern  bool_t server_copy_key_1_svc();
 extern int claves_1_freeresult ();
 #endif /* K&R C */
 
 /* the xdr functions */
 
 #if defined(__STDC__) || defined(__cplusplus)
-extern  bool_t xdr_op3_1_argument (XDR *, op3_1_argument*);
-extern  bool_t xdr_op6_1_argument (XDR *, op6_1_argument*);
-extern  bool_t xdr_op7_1_argument (XDR *, op7_1_argument*);
+extern  bool_t xdr_respuesta (XDR *, respuesta*);
+extern  bool_t xdr_server_set_value_1_argument (XDR *, server_set_value_1_argument*);
+extern  bool_t xdr_server_modify_value_1_argument (XDR *, server_modify_value_1_argument*);
+extern  bool_t xdr_server_copy_key_1_argument (XDR *, server_copy_key_1_argument*);
 
 #else /* K&R C */
-extern bool_t xdr_op3_1_argument ();
-extern bool_t xdr_op6_1_argument ();
-extern bool_t xdr_op7_1_argument ();
+extern bool_t xdr_respuesta ();
+extern bool_t xdr_server_set_value_1_argument ();
+extern bool_t xdr_server_modify_value_1_argument ();
+extern bool_t xdr_server_copy_key_1_argument ();
 
 #endif /* K&R C */
 
