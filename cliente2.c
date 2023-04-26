@@ -6,7 +6,7 @@ int main(void) {
     printf("Client 2\n");
     printf("-------- RESULTS OF EXECUTION --------\n\n");
     
-
+    
     // testing modify_value
     int test_modify_value = client_modify_value(2, "modified_2", 4, 3.57);
     printf("Modify second element: %d \n", test_modify_value);
@@ -26,7 +26,7 @@ int main(void) {
     printf("Exist third element: %d \n", test_exist3);
     printf("Exist fourth element: %d \n", test_exist4);
     printf("Exist fifth element: %d \n", test_exist5);
-
+    
     // testing copy_key
     int test_copy_key1 = client_copy_key(4, 6);
     printf("Copy third element to fourth element: %d \n", test_copy_key1);

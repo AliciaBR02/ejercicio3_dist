@@ -11,7 +11,7 @@ int main(void) {
     printf("Result of init: %d\n\n", test_init);
 
     // testing set_value
-    /*
+    
     int test_set_value1 = client_set_value(1, "insert", 7, 4.12);
     int test_set_value2 = client_set_value(2, "computer", 4, 3.57);
     int test_set_value3 = client_set_value(3, "book", 5, 2.12);
@@ -40,6 +40,6 @@ int main(void) {
     printf("Value1: %s \n", value1);
     printf("Value2: %d \n", value2);
     printf("Value3: %f \n\n", value3);
-*/
+
     return 0;
 }

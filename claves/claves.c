@@ -22,7 +22,6 @@ char *get_env_variable() {
 }
 
 int client_init() {
-    int err;
     CLIENT *clnt;
 	enum clnt_stat retval;
 	int result;
@@ -30,42 +29,141 @@ int client_init() {
 
     
     ip_tuplas = get_env_variable();
-    if (err != 0) return -1;
+    if (!ip_tuplas) return -1;
     clnt = clnt_create (ip_tuplas, CLAVES, OPERACIONESVER, "tcp");
 	if (clnt == NULL) {
 		clnt_pcreateerror (ip_tuplas);
 		exit (1);
     }
-    dprintf(1, "cliente creado");
     retval = server_init_1(&result, clnt);
-    dprintf(1, "init: %d", result);
 	if (retval != RPC_SUCCESS) {
 		clnt_perror (clnt, "call failed");
 	}
-    return 0;
+    return result;
 }
 
 
 int client_set_value(int key, char *value1, int value2, double value3) {
-    return 0;
+    CLIENT *clnt;
+	enum clnt_stat retval;
+	int result;
+    char *ip_tuplas;
+
+    
+    ip_tuplas = get_env_variable();
+    if (!ip_tuplas) return -1;
+    clnt = clnt_create (ip_tuplas, CLAVES, OPERACIONESVER, "tcp");
+	if (clnt == NULL) {
+		clnt_pcreateerror (ip_tuplas);
+		exit (1);
+    }
+    retval = server_set_value_1(key, value1, value2, value3, &result, clnt);
+	if (retval != RPC_SUCCESS) {
+		clnt_perror (clnt, "call failed");
+	}
+    return result;
 }
 
 int client_get_value(int key, char *value1, int *value2, double *value3) {
-    return 0;
+    CLIENT *clnt;
+	enum clnt_stat retval;
+	struct respuesta result;
+    char *ip_tuplas;
+
+    ip_tuplas = get_env_variable();
+    dprintf(1, "ip_tuplas: %s\n", ip_tuplas);
+    clnt = clnt_create (ip_tuplas, CLAVES, OPERACIONESVER, "tcp");
+	if (clnt == NULL) {
+		clnt_pcreateerror (ip_tuplas);
+		exit (1);
+    }
+    retval = server_get_value_1(key, &result, clnt);
+	if (retval != RPC_SUCCESS) {
+		clnt_perror (clnt, "call failed");
+	}
+    dprintf(1, "get value ejecutado\n");
+    strcpy(value1, result.value1);
+    *value2 = result.value2;
+    *value3 = result.value3;
+    return result.result;
 }
 
 int client_modify_value(int key, char *value1, int value2, double value3) {
-    return 0;
+    CLIENT *clnt;
+	enum clnt_stat retval;
+	int result;
+    char *ip_tuplas;
+
+    
+    ip_tuplas = get_env_variable();
+    clnt = clnt_create (ip_tuplas, CLAVES, OPERACIONESVER, "tcp");
+	if (clnt == NULL) {
+		clnt_pcreateerror (ip_tuplas);
+		exit (1);
+    }
+    retval = server_modify_value_1(key, value1, value2, value3, &result, clnt);
+	if (retval != RPC_SUCCESS) {
+		clnt_perror (clnt, "call failed");
+	}
+    return result;
 }
 
 int client_delete_value(int key) {
-    return 0;
+    CLIENT *clnt;
+	enum clnt_stat retval;
+	int result;
+    char *ip_tuplas;
+
+    
+    ip_tuplas = get_env_variable();
+    clnt = clnt_create (ip_tuplas, CLAVES, OPERACIONESVER, "tcp");
+	if (clnt == NULL) {
+		clnt_pcreateerror (ip_tuplas);
+		exit (1);
+    }
+    retval = server_delete_value_1(key, &result, clnt);
+	if (retval != RPC_SUCCESS) {
+		clnt_perror (clnt, "call failed");
+	}
+    return result;
 }
 
 int client_exist(int key) {
-    return 0;
+    CLIENT *clnt;
+	enum clnt_stat retval;
+	int result;
+    char *ip_tuplas;
+
+    
+    ip_tuplas = get_env_variable();
+    clnt = clnt_create (ip_tuplas, CLAVES, OPERACIONESVER, "tcp");
+	if (clnt == NULL) {
+		clnt_pcreateerror (ip_tuplas);
+		exit (1);
+    }
+    retval = server_exist_1(key, &result, clnt);
+	if (retval != RPC_SUCCESS) {
+		clnt_perror (clnt, "call failed");
+	}
+    return result;
 }
 
 int client_copy_key(int key1, int key2) {
-    return 0;
+    CLIENT *clnt;
+	enum clnt_stat retval;
+	int result;
+    char *ip_tuplas;
+
+    
+    ip_tuplas = get_env_variable();
+    clnt = clnt_create (ip_tuplas, CLAVES, OPERACIONESVER, "tcp");
+	if (clnt == NULL) {
+		clnt_pcreateerror (ip_tuplas);
+		exit (1);
+    }
+    retval = server_copy_key_1(key1, key2, &result, clnt);
+	if (retval != RPC_SUCCESS) {
+		clnt_perror (clnt, "call failed");
+	}
+    return result;
 }
