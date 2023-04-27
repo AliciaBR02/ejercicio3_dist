@@ -5,7 +5,7 @@ int main(void) {
     printf("-------------------------------------\n");
     printf("Client 1\n");
     printf("-------- RESULTS OF EXECUTION --------\n\n");
-    
+   /* 
     // testing init
     int test_init = client_init();
     printf("Result of init: %d\n\n", test_init);
@@ -20,7 +20,7 @@ int main(void) {
     printf("Insert second element: %d\n", test_set_value2);
     printf("Insert third element: %d\n", test_set_value3);
     printf("Insert fourth element: %d\n", test_set_value4);
-    
+    */
     // testing get_value
     char value1[256];
     int value2;
@@ -29,7 +29,7 @@ int main(void) {
     printf("Get first element: %d \n", test_get_value1);
     printf("Value1: %s \n", value1);
     printf("Value2: %d \n", value2);
-    printf("Value3: %f \n\n", value3);
+    printf("Value3: %f \n\n", value3);/*
     int test_get_value2 = client_get_value(2, value1, &value2, &value3);
     printf("Get second element: %d \n", test_get_value2);
     printf("Value1: %s \n", value1);
@@ -40,6 +40,6 @@ int main(void) {
     printf("Value1: %s \n", value1);
     printf("Value2: %d \n", value2);
     printf("Value3: %f \n\n", value3);
-
+*/
     return 0;
 }

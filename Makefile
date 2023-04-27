@@ -12,7 +12,7 @@ CLIENT2 = cliente2.o
 LIB_OBJS = claves/claves.o
 all: $(OBJS)
 
-libclaves.so: claves/claves.c
+libclaves.so: claves/claves.o
 	$(CC) $(CFLAGS) -fPIC -c -o $<
 	$(CC) $(LDFLAGS) -shared -o $@ $(LIB_OBJS) -lrt
 
