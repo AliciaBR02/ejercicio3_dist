@@ -6,6 +6,7 @@
 
 #include "claves.h"
 #include "operaciones/operaciones.h"
+pthread_mutex_t mymytex = PTHREAD_MUTEX_INITIALIZER;
 
 bool_t
 server_init_1_svc(int *result, struct svc_req *rqstp)
@@ -51,9 +52,14 @@ server_get_value_1_svc(int key, respuesta *result,  struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
+	result->value1 = malloc(256);
 	retval = TRUE;
 	result->result = get_value(key, result->value1, &result->value2, &result->value3);
-
+	dprintf(1, "operacion ejecutada\n");
+	dprintf(1, "key: %d\n", key);
+	dprintf(1, "value1: %s\n", result->value1);
+	dprintf(1, "value2: %d\n", result->value2);
+	dprintf(1, "value3: %f\n", result->value3);
 	return retval;
 }
 

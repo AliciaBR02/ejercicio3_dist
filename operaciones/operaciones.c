@@ -46,7 +46,7 @@ int get_value(int key, char *value1, int *value2, double *value3) {
     FILE *f = fopen("data.txt", "r");
     // read the file line by line and check if the first number is the searched key
     int k;
-    char v1[256];
+    char *v1 = malloc(256);
     int v2;
     double v3;
     while (fscanf(f, "%d %s %d %lf", &k, v1, &v2, &v3) != EOF) {
@@ -59,6 +59,7 @@ int get_value(int key, char *value1, int *value2, double *value3) {
             return 0;
         }
     }
+    fclose(f);
     return -1;
 }
 
