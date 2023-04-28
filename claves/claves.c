@@ -79,13 +79,11 @@ int client_get_value(int key, char *value1, int *value2, double *value3) {
 		clnt_pcreateerror (ip_tuplas);
 		exit (1);
     }
-    dprintf(1, "\nantes de la operacion\n");
     result.value1 = malloc(256);
     retval = server_get_value_1(key, &result, clnt);
 	if (retval != RPC_SUCCESS) {
 		clnt_perror (clnt, "call failed");
 	}
-    dprintf(1, "despues de laoperacion\n");
     strcpy(value1, result.value1);
     *value2 = result.value2;
     *value3 = result.value3;
