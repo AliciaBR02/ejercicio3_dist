@@ -7,6 +7,7 @@
 #include "claves.h"
 #include "operaciones/operaciones.h"
 pthread_mutex_t mymytex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex_database;
 
 bool_t
 server_init_1_svc(int *result, struct svc_req *rqstp)
@@ -14,7 +15,9 @@ server_init_1_svc(int *result, struct svc_req *rqstp)
 	bool_t retval;
 	
 	retval = TRUE;
+	pthread_mutex_lock(&mutex_database);
 	*result = init();
+	pthread_mutex_unlock(&mutex_database);
 	return retval;
 }
 
@@ -27,7 +30,9 @@ server_exist_1_svc(int key, int *result,  struct svc_req *rqstp)
 	 * insert server code here
 	 */
 	retval = TRUE;
+	pthread_mutex_lock(&mutex_database);
 	*result = exist(key);
+	pthread_mutex_unlock(&mutex_database);
 	return retval;
 }
 
@@ -40,7 +45,9 @@ server_set_value_1_svc(int key, char *value1, int value2, double value3, int *re
 	 * insert server code here
 	 */
 	retval = TRUE;
+	pthread_mutex_lock(&mutex_database);
 	*result = set_value(key, value1, value2, value3);
+	pthread_mutex_unlock(&mutex_database);
 	return retval;
 }
 
@@ -54,12 +61,9 @@ server_get_value_1_svc(int key, respuesta *result,  struct svc_req *rqstp)
 	 */
 	result->value1 = malloc(256);
 	retval = TRUE;
+	pthread_mutex_lock(&mutex_database);
 	result->result = get_value(key, result->value1, &result->value2, &result->value3);
-	dprintf(1, "operacion ejecutada\n");
-	dprintf(1, "key: %d\n", key);
-	dprintf(1, "value1: %s\n", result->value1);
-	dprintf(1, "value2: %d\n", result->value2);
-	dprintf(1, "value3: %f\n", result->value3);
+	pthread_mutex_unlock(&mutex_database);
 	return retval;
 }
 
@@ -72,7 +76,9 @@ server_delete_value_1_svc(int key, int *result,  struct svc_req *rqstp)
 	 * insert server code here
 	 */
 	retval = TRUE;
+	pthread_mutex_lock(&mutex_database);
 	*result = delete_value(key);
+	pthread_mutex_unlock(&mutex_database);
 
 	return retval;
 }
@@ -86,7 +92,9 @@ server_modify_value_1_svc(int key, char *arg2, int value2, double value3, int *r
 	 * insert server code here
 	 */
 	retval = TRUE;
+	pthread_mutex_lock(&mutex_database);
 	*result = modify_value(key, arg2, value2, value3);
+	pthread_mutex_unlock(&mutex_database);
 
 	return retval;
 }
@@ -100,7 +108,9 @@ server_copy_key_1_svc(int key1, int key2, int *result,  struct svc_req *rqstp)
 	 * insert server code here
 	 */
 	retval = TRUE;
+	pthread_mutex_lock(&mutex_database);
 	*result = copy_key(key1, key2);
+	pthread_mutex_unlock(&mutex_database);
 	return retval;
 }
 
